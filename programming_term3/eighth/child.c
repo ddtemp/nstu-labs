@@ -64,9 +64,9 @@ int main(int argc, char* argv[]) {
                   return -1;
                }
 
-               char connect[] = "connect";
+/*               char connect[] = "connect";
                write(sock, connect, sizeof(connect));
-
+*/
                dup2(sock, STDIN_FILENO);
                dup2(sock, STDOUT_FILENO);
                int ret = child_main(1, argv);
