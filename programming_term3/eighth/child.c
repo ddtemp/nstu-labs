@@ -30,6 +30,9 @@ int main(int argc, char* argv[]) {
        printf("Fail to create socket\n");
        return -1;
    }
+   
+   int one = 1;
+   setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int));
 
    if (bind(sock, &address, sizeof(address))) {
        printf("Fail to bind socket\n");
