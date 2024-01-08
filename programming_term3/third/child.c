@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
       case 0:
         return child_main(3, argv);
       case -1:
-        printf("Fail to fork\n");
+        printf("Failed to fork\n");
         return -1;
       default:
         // pids[i] = pid;
