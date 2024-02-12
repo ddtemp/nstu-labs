@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from converter import Convert
+import sys
 
 
 def convert_to_int(value):
@@ -49,16 +50,19 @@ class Date:
         self.year = year
 
         if not (1 <= self.year <= 9999):
-            exit("Incorrect year. It must be a valid integer or a valid Roman numeral")
+            print("Incorrect year. It must be a valid integer or a valid Roman numeral")
+            sys.exit(1)
 
         if not (1 <= self.month <= 12):
-            exit("Incorrect month. It must be a valid integer, a valid Roman numeral or a valid month name")
+            print("Incorrect month. It must be a valid integer, a valid Roman numeral or a valid month name")
+            sys.exit(1)
 
         if self.is_leap_year():
             self.days_in_month[1] = 29
 
         if not (1 <= self.day <= self.days_in_month[self.month - 1]):
-            exit("Incorrect day. It must be a valid integer or a valid Roman numeral")
+            print("Incorrect day. It must be a valid integer or a valid Roman numeral")
+            sys.exit(1)
 
     def is_leap_year(self):
         return ((self.year % 4 == 0) and (self.year % 100 != 0)) or self.year % 400 == 0
@@ -82,13 +86,18 @@ if __name__ == "__main__":
 
     day_input = convert_to_int(input("Enter the day: "))
     if day_input is None:
-        exit("Incorrect day. It must be a valid integer or a valid Roman numeral")
+        print("Incorrect day. It must be a valid integer or a valid Roman numeral")
+        sys.exit(1)
+
     month_input = convert_month_to_int(input("Enter the month: "))
     if month_input is None:
-        exit("Incorrect month. It must be a valid integer, a valid Roman numeral or a valid month name")
+        print("Incorrect month. It must be a valid integer, a valid Roman numeral or a valid month name")
+        sys.exit(1)
+
     year_input = convert_to_int(input("Enter the year: "))
     if year_input is None:
-        exit("Incorrect year. It must be a valid integer or a valid Roman numeral")
+        print("Incorrect year. It must be a valid integer or a valid Roman numeral")
+        sys.exit(1)
 
     date_input = Date(day_input, month_input, year_input)
 
