@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заметки</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Заметки</h1>
+    <form action="{{ url_for('add_note') }}" method="post">
+        <input type="text" name="text" placeholder="Заметка" minlength="1" maxlength="30" required>
+        <input type="number" name="importance" placeholder="Важность (1-5)" min="1" max="5" required>
+        <input type="submit" value="Добавить заметку">
+    </form>
+    <ul>
+        {% for note in notes %}
+            <li>
+                {{ note.text }} ({{ note.importance }})
+                <div class="edit-delete-buttons">
+                    <a href="{{ url_for('edit_note', note_id=note.id) }}">Редактировать</a>
+                    <a href="{{ url_for('delete_note', note_id=note.id) }}">Удалить</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
