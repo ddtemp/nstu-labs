@@ -1,5 +1,3 @@
-#!/usr/bin/python
-from converter import Convert
 import sys
 
 
@@ -7,11 +5,7 @@ def convert_to_int(value):
     try:
         return int(value)
     except ValueError:
-        try:
-            value = value.upper()
-            return Convert.from_roman_to_arabic(value)
-        except ValueError:
-            return None
+        return None
 
 
 def convert_month_to_int(value):
@@ -49,19 +43,19 @@ class Date:
         self.month = month
         self.year = year
 
-        if self.year is None:  # or not (1 <= self.year <= 9999):
-            print("Incorrect year. It must be a valid integer or a valid Roman numeral")
+        if self.year is None or not (1 <= self.year <= 9999):
+            print("Incorrect year. It must be a valid integer")
             sys.exit(1)
 
         if (self.month is None) or not (1 <= self.month <= 12):
-            print("Incorrect month. It must be a valid integer, a valid Roman numeral or a valid month name")
+            print("Incorrect month. It must be a valid integer or a valid month name")
             sys.exit(1)
 
         if self.is_leap_year():
             self.days_in_month[1] = 29
 
         if (self.day is None) or not (1 <= self.day <= self.days_in_month[self.month - 1]):
-            print("Incorrect day. It must be a valid integer or a valid Roman numeral")
+            print("Incorrect day. It must be a valid integer")
             sys.exit(1)
 
     def is_leap_year(self):
@@ -90,7 +84,7 @@ if __name__ == "__main__":
 
     if (day_input == 0) and (month_input == 0) and (year_input == 0):
         print("Input is empty, using constant variables")
-        date_input = Date(22, 2, 2005)
+        date_input = Date(30, 1, 2004)
     else:
         date_input = Date(day_input, month_input, year_input)
 
